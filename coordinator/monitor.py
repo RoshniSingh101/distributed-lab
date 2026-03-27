@@ -15,8 +15,8 @@ class AvailabilityMonitor:
 
     def get_sla_status(self):
         uptime = self.get_uptime_percentage()
-        if uptime >= 99.999: 
+        if uptime >= 99.99999: 
             return "5 Nines (Carrier Grade)"
-        if uptime >= 99.9: 
+        if uptime >= 99.999: 
             return "3 Nines (Standard)"
         return "Failing SLA"

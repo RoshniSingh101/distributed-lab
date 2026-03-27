@@ -47,10 +47,10 @@ def handle_read(key):
     for node in NODES:
         try:
             # changed from requests to request
-            r = request.get(f"{node}/get/{key}", timeout=0.5)
+            r = requests.get(f"{node}/get/{key}", timeout=0.5)
             if r.status_code == 200:
                 return r.json()
-        except:
+        except Exception:
             continue
     return jsonify({"error": "Data Unavailable"}), 503
 
@@ -78,7 +78,7 @@ def health_check():
             # issue was here with requests
             r = requests.get(f"{url}/get/health", timeout=0.2)
             status[short_name] = "online" if r.status_code == 200 else "offline"
-        except:
+        except Exception:
             status[short_name] = "offline"
     return jsonify(status)
 

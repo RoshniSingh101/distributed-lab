@@ -39,33 +39,6 @@ document.querySelectorAll('.mode-btn').forEach(button => {
     });
 });
 
-// stress test response
-document.getElementById('stress-test').addEventListener('click', async (e) => {
-    const btn = e.currentTarget;
-    const originalText = btn.innerHTML;
-    
-    // UI Feedback: Disable while running
-    btn.disabled = true;
-    btn.style.opacity = "0.7";
-    btn.innerHTML = "<span>⏳</span> Simulating Load...";
-
-    // Fire off requests
-    const requests = [];
-    for (let i = 0; i < 100; i++) {
-        requests.push(SystemAPI.writeData(`stress-key-${i}`, `val-${Math.random()}`));
-    }
-
-    // Wait for all to finish
-    await Promise.all(requests);
-
-    // Reset UI
-    btn.disabled = false;
-    btn.style.opacity = "1";
-    btn.innerHTML = originalText;
-    
-    console.log("Stress test complete: 100 writes dispatched.");
-});
-
 // Check node health in conjunction with quorum to see what's going on
 async function updateNodeLights() {
     const health = await SystemAPI.getHealth();
