@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Distributed Lab Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Distributed Systems Lab</h1>
+        <h2 id="mode-display">Mode: Loading...</h2>
+    </header>
+
+    <div class="controls">
+        <button class="mode-btn" data-mode="STRONG">Strong Consistency (CP)</button>
+        <button class="mode-btn" data-mode="EVENTUAL">Eventual Consistency (AP)</button>
+        <button class="mode-btn" data-mode="QUORUM">Quorum (Balanced)</button>
+    </div>
+
+    <main id="app-root" class="dashboard-grid"></main>
+
+    <div class="action-panel">
+        <button id="stress-test" class="stress-btn">
+            <span class="icon">🚀</span> Launch Stress Test (100 Req)
+        </button>
+    </div>
+
+    <div class="node-status-container">
+        <div id="status-node-1" class="node-light">Node 1</div>
+        <div id="status-node-2" class="node-light">Node 2</div>
+        <div id="status-node-3" class="node-light">Node 3</div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

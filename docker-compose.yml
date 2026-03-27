@@ -1,0 +1,74 @@
+# services:
+#   coordinator:
+#     build: ./coordinator
+#     ports:
+#       - "5000:5000"
+#     environment:
+#       - MODE=STRONG # Toggle this to test different trade-offs
+  
+#   node-1:
+#     build: ./node
+#     environment:
+#       - NODE_ID=node-1
+#   node-2:
+#     build: ./node
+#     environment:
+#       - NODE_ID=node-2
+#   node-3:
+#     build: ./node
+#     environment:
+#       - NODE_ID=node-3
+
+#version: '3.8'
+
+services:
+  coordinator:
+    build: ./coordinator
+    ports:
+      - "8080:5000" # changed map host 8080 to container 5000 instead of map host 5000
+    environment:
+      - MODE=STRONG        # Change to EVENTUAL or QUORUM for testing
+      - QUORUM_COUNT=2     # Used for Quorum strategy
+    depends_on:
+      - node-1
+      - node-2
+      - node-3
+    networks:
+      - cluster_net
+
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "3000:80"
+    depends_on:
+      - coordinator
+    networks:      
+      - cluster_net
+
+  node-1:
+    build: ./node
+    container_name: node-1
+    environment:
+      - NODE_ID=node-1
+    networks:
+      - cluster_net
+
+  node-2:
+    build: ./node
+    container_name: node-2
+    environment:
+      - NODE_ID=node-2
+    networks:
+      - cluster_net
+
+  node-3:
+    build: ./node
+    container_name: node-3
+    environment:
+      - NODE_ID=node-3
+    networks:
+      - cluster_net
+
+networks:
+  cluster_net:
+    driver: bridge
