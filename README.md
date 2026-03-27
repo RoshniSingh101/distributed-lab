@@ -40,7 +40,7 @@ The system implements three distinct consistency strategies managed by the `Cons
 
 ### 2. The SLA Monitor
 The `AvailabilityMonitor` tracks every request and classifies system health based on uptime percentages. To handle lab-scale testing (100-request batches), the thresholds are:
-* **5 Nines (Carrier Grade):** $\ge  $99.999\%$ Uptime
+* **5 Nines (Carrier Grade):** $\ge 99.999\%$ Uptime
 * **3 Nines (Standard):** $\ge 99.9\%$ Uptime
 * **Failing SLA:** $< 99.9\%$ Uptime
 
