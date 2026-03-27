@@ -9,7 +9,7 @@ NODE_ID = os.getenv("NODE_ID", "unknown")
 @app.route('/get/<key>')
 def get_val(key):
     # simulate a tiny network hop latency
-    #time.sleep(0.05) 
+    time.sleep(0.05) 
     return jsonify({"node": NODE_ID, "val": storage.get(key), "status": "online"})
 
 @app.route('/set', methods=['POST'])
